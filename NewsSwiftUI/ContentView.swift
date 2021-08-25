@@ -16,7 +16,8 @@ struct ContentView: View {
         NavigationView {
         List(network.articles) {
             article in
-            
+           NavigationLink(destination: NewsDetailView(urlString: article.url)){
+
             Item(description: article.description, source: article.source.name, title: article.title)
             
             if article.urlToImage != "" {
@@ -24,6 +25,7 @@ struct ContentView: View {
                          options: .highPriority,
                          context: nil).resizable().frame(width: 130, height: 130).cornerRadius(20)
             }
+           }
         }.navigationBarTitle("Haberler")
     }
             .onAppear {
@@ -44,7 +46,7 @@ struct Item: View {
   var description: String?
   var source: String
   var title: String
- // var urlToImage: String
+ 
   
   
     init(description: String?, source: String, title: String) {
@@ -53,7 +55,7 @@ struct Item: View {
     self.description = description ?? ""
     self.source = source
     self.title = title
-//    self.urlToImage = urlToImage
+
   }
   
 
@@ -69,7 +71,7 @@ struct Item: View {
       Text(source)
         .font(.footnote)
         .foregroundColor(.secondary)
-        .padding(.vertical)
+  //      .padding(.vertical)
       Text(description ?? "")
         .font(.system(size: 16))
         .padding(.bottom)
